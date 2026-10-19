@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TurboCleaner — Deep PC & RAM Optimizer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Custom Frameless Titlebar -->
+  <header class="titlebar">
+    <div class="brand">
+      <img src="assets/icon.png" class="brand-img" alt="TurboCleaner">
+      <span class="brand-name">TurboCleaner</span>
+      <span class="brand-tag" data-i18n="appSubtitle">PC Optimizer</span>
+    </div>
+
+    <div class="titlebar-center">
+      <div class="status-indicator" id="globalStatusPill">
+        <span class="status-dot"></span>
+        <span id="globalStatusText" data-i18n="statusReady">System Ready</span>
+      </div>
+    </div>
+
+    <div class="titlebar-right">
+      <button class="btn-lang" id="btnLangToggle">🇮🇶 العربية</button>
+      <div class="window-controls">
+        <button class="win-btn" id="btnMin">−</button>
+        <button class="win-btn" id="btnMax">□</button>
+        <button class="win-btn win-close" id="btnClose">✕</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="cleaner">
+          <span class="nav-icon">🧹</span>
+          <span class="nav-text" data-i18n="navDeepClean">Deep Clean</span>
+        </button>
+        <button class="nav-item" data-tab="ram">
+          <span class="nav-icon">⚡</span>
+          <span class="nav-text" data-i18n="navRAMBoost">RAM Booster</span>
+        </button>
+        <button class="nav-item" data-tab="startup">
+          <span class="nav-icon">🚀</span>
+          <span class="nav-text" data-i18n="navStartup">Startup Apps</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="stats-mini">
+          <span class="stats-label" data-i18n="lblDiskSpace">Clean & Safe</span>
+          <span class="stats-val" data-i18n="lblNoAdware">100% Ad-Free</span>
+        </div>
+        <button class="btn-recycle" id="btnQuickRecycle" data-i18n="btnEmptyBin">
+          🗑️ Empty Recycle Bin
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Panels -->
+    <main class="content-panel">
+
+      <!-- TAB 1: DEEP CLEAN -->
+      <section class="tab-content active" id="tab-cleaner">
+        <div class="cleaner-hero">
+          <div class="scan-center">
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring-outer"></div>
+            <button class="btn-scan" id="btnScanAction">
+              <div class="scan-icon" id="scanIcon">🧹</div>
+              <div class="scan-label" id="scanButtonLabel" data-i18n="btnScanNow">SCAN PC JUNK</div>
+              <div class="scan-sub" id="scanButtonSub" data-i18n="btnScanSub">Click to analyze disk</div>
+            </button>
+          </div>
+
+          <!-- Total Summary Card -->
+          <div class="summary-card">
+            <div class="summary-header">
+              <span class="summary-title" data-i18n="summaryTitle">Reclaimable Space</span>
+              <span class="summary-badge" id="scanStatusBadge">IDLE</span>
+            </div>
+            <div class="summary-metric">
+              <span class="metric-val" id="metricTotalBytes">0</span>
+              <span class="metric-unit" id="metricTotalUnit">MB</span>
+            </div>
+            <div class="summary-details">
+              <div class="detail-col">
+                <span class="detail-label" data-i18n="lblFilesFound">Files Found</span>
+                <span class="detail-val" id="metricFilesCount">0</span>
+              </div>
+              <div class="detail-col">
+                <span class="detail-label" data-i18n="lblSafety">Safety</span>
+                <span class="detail-val" style="color: #10b981;" data-i18n="lblSafeVerified">100% Verified</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categories Checklist -->
+        <div class="categories-container">
+          <div class="categories-toolbar">
+            <span class="toolbar-title" data-i18n="junkCategories">Junk Categories to Clean:</span>
+            <div class="toolbar-actions">
+              <button class="btn-link" id="btnSelectAll" data-i18n="btnSelectAll">Select All</button>
+              <button class="btn-link" id="btnDeselectAll" data-i18n="btnDeselectAll">Deselect All</button>
+            </div>
+          </div>
+
+          <div class="categories-grid" id="categoriesGrid">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: RAM BOOSTER -->
+      <section class="tab-content" id="tab-ram">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title" data-i18n="ramTitle">Live RAM Purge & Memory Optimization</h2>
+            <p class="section-desc" data-i18n="ramDesc">Cleans process working sets and flushes idle standby memory caches to eliminate gaming stutter and free up RAM.</p>
+          </div>
+        </div>
+
+        <div class="ram-hero">
+          <div class="ram-card">
+            <div class="ram-gauge-circle">
+              <div class="ram-percent" id="ramPercentVal">--%</div>
+              <div class="ram-percent-label" data-i18n="ramUsed">RAM In Use</div>
+            </div>
+
+            <div class="ram-numbers">
+              <div class="ram-stat-row">
+                <span data-i18n="ramTotal">Total Physical RAM:</span>
+                <strong id="ramTotalVal">-- GB</strong>
+              </div>
+              <div class="ram-stat-row">
+                <span data-i18n="ramUsedFormatted">Currently Used:</span>
+                <strong id="ramUsedVal" style="color: #00f0ff;">-- GB</strong>
+              </div>
+              <div class="ram-stat-row">
+                <span data-i18n="ramFreeFormatted">Available Free:</span>
+                <strong id="ramFreeVal" style="color: #10b981;">-- GB</strong>
+              </div>
+            </div>
+
+            <button class="btn-boost-ram" id="btnPurgeRAM" data-i18n="btnPurgeRAM">
+              ⚡ PURGE STANDBY RAM NOW
+            </button>
+          </div>
+
+          <div class="ram-explanation">
+            <h3 data-i18n="ramWhyTitle">Why Purging RAM Boosts PC Performance?</h3>
+            <p data-i18n="ramWhyText">Windows often keeps closed apps and background caches stored in 'Standby Memory'. When you launch heavy games or software, Windows has to scramble to clear that memory, causing micro-stutters and FPS drops. TurboCleaner forces an immediate cleanup, giving your game 100% clean RAM immediately.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: STARTUP APPS -->
+      <section class="tab-content" id="tab-startup">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title" data-i18n="startupTitle">Windows Startup Applications</h2>
+            <p class="section-desc" data-i18n="startupDesc">Disable apps that launch silently when Windows turns on to cut your boot time down to a few seconds.</p>
+          </div>
+          <button class="btn btn-secondary" id="btnRefreshStartup" data-i18n="btnRefreshStartup">🔄 Refresh List</button>
+        </div>
+
+        <div class="startup-list-container">
+          <table class="data-table" id="startupTable">
+            <thead>
+              <tr>
+                <th data-i18n="colAppName">Application</th>
+                <th data-i18n="colBootImpact">Boot Impact</th>
+                <th data-i18n="colLocation">Location</th>
+                <th data-i18n="colStatus">Action</th>
+              </tr>
+            </thead>
+            <tbody id="startupTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

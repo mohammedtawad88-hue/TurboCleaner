@@ -1,0 +1,46 @@
+{
+  "name": "turbocleaner",
+  "version": "1.0.0",
+  "description": "Ultra-fast, modern, ad-free PC junk cleaner and Windows optimizer",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "keywords": [
+    "cleaner",
+    "pc-optimizer",
+    "ccleaner-alternative",
+    "ram-purge",
+    "startup-manager",
+    "disk-cleanup"
+  ],
+  "author": "TurboCleaner Team",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^34.5.8",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.turbocleaner.app",
+    "productName": "TurboCleaner",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon.ico",
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "TurboCleaner"
+    }
+  }
+}
