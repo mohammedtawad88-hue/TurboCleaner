@@ -6,6 +6,8 @@
 [![Total Downloads](https://img.shields.io/github/downloads/mohammedtawad88-hue/TurboCleaner/total?style=for-the-badge&color=10b981&logo=github&label=Downloads)](https://github.com/mohammedtawad88-hue/TurboCleaner/releases)
 [![GitHub release](https://img.shields.io/github/v/release/mohammedtawad88-hue/TurboCleaner?style=for-the-badge&color=0284c7)](https://github.com/mohammedtawad88-hue/TurboCleaner/releases/latest)
 
+![TurboCleaner Comparison](assets/comparison.jpg)
+
 ---
 
 ## 🚀 Key Features
